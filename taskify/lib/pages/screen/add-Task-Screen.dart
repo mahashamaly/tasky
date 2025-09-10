@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taskify/core/widget/custom_text_form_faild.dart';
 import 'dart:convert';
 
 import 'package:taskify/models/task_model.dart';
@@ -35,28 +36,23 @@ class _addTaskState extends State<AddTaskScreen> {
       ),
 
       body: SafeArea(
+
+
+        
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Form(
             key: _key,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            
               
               children: [
-               Text(
-                 "Task Name",
-                 style: TextStyle(
-                   fontSize: 16,
-                   fontWeight: FontWeight.w400,
-                   color: Color(0xffFFFCFC),
-                 ),
-               ),
+
+
+
                            
                SizedBox(height: 8),
-                           
-               TextFormField(
-                 controller: taskNameController,
-                 style: TextStyle(color: Colors.white),
+               CustomTextFormFaild(controller: taskNameController, hintText: "Finish UI design for login screen",title: "Task Name",
                  validator: (String? value) {
                    //if(value?.trim().isEmpty??false)
                    if (value == null || value.trim().isEmpty) {
@@ -64,53 +60,23 @@ class _addTaskState extends State<AddTaskScreen> {
                    }
                    return null;
                  },
-                           
-                 decoration: InputDecoration(
-                   hintText: ("Finish UI design for login screen"),
-                   hintStyle: TextStyle(
-                     fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff6D6D6D)
-                   ),
-                   border: OutlineInputBorder(
-                     borderRadius: BorderRadius.circular(16),
-                     borderSide: BorderSide.none,
-                   ),
-                           
-                   filled: true,
-                   fillColor: Color(0xff282828),
-                 ),
+                 
+               
                ),
+                           
+              
                SizedBox(
                  height: 20,
                ),
                            
-                 Text("Task Description",style:TextStyle(fontSize:16 ,fontWeight: FontWeight.w400,color: Color(0xffFFFCFC)),),
                            
-                   SizedBox(
-                     height: 8,
-                   ),
-                   TextFormField(
-                 controller:taskDescriptionController,
-                 maxLines: 5,
-                 style: TextStyle(color: Colors.white),
-                         
-                 decoration: InputDecoration(
-                   hintText: ("Finish onboarding UI and hand off to devs by Thursday."),
-                   hintStyle: TextStyle(
-                     fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xff6D6D6D)
-                   ),
-                   border: OutlineInputBorder(
-                     borderRadius: BorderRadius.circular(16),
-                     borderSide: BorderSide.none,
-                   ),
-                           
-                   filled: true,
-                   fillColor: Color(0xff282828),
-                 ),
-               ),
+                   
+                    CustomTextFormFaild(controller: taskDescriptionController,
+                    maxLines: 5,
+                    hintText: "Finish onboarding UI and hand off to devs by Thursday.",
+                    title: "Task Description",
+                    ),
+            
                
                
                SizedBox(

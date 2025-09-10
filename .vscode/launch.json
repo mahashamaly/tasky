@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib\\pages\\widgets\\silvar-task-list-widget.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "taskify",
+            "program": "lib\\pages\\widgets\\silvar-task-list-widget.dart"
+        }
+    ]
+}

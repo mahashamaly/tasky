@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:taskify/pages/Profile_screen.dart';
-import 'package:taskify/pages/completed_tasks_screen.dart';
-import 'package:taskify/pages/home_screen.dart';
-import 'package:taskify/pages/tasks_screen.dart';
+import 'package:taskify/pages/screen/Profile_screen.dart';
+import 'package:taskify/pages/screen/completed_tasks_screen.dart';
+import 'package:taskify/pages/screen/home_screen.dart';
+import 'package:taskify/pages/screen/tasks_screen.dart';
+
 
 class MainSecreen extends StatefulWidget {
   const MainSecreen({super.key});

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskify/models/task_model.dart';
-import 'package:taskify/pages/completed_tasks_screen.dart';
+
 import 'package:taskify/pages/widgets/task-list-widgets.dart';
 
 class TasksScreen extends StatefulWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:taskify/models/task_model.dart';
-import 'package:taskify/pages/highpriority_screen.dart';
+import 'package:taskify/pages/screen/highpriority_screen.dart';
+
 
 class HighprioritytasksWidget extends StatelessWidget {
   const HighprioritytasksWidget({

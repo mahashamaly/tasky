@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:taskify/pages/home_screen.dart';
-import 'package:taskify/pages/main_Secreen.dart';
+import 'package:taskify/pages/screen/main_Secreen.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
    WelcomeScreen({super.key});

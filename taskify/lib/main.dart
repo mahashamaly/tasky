@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:taskify/pages/home_screen.dart';
-import 'package:taskify/pages/main_Secreen.dart';
+import 'package:taskify/pages/screen/main_Secreen.dart';
+import 'package:taskify/pages/screen/welcome_screen.dart';
 
-import 'package:taskify/welcome_screen.dart';
+
+
 
 void main() async{
   

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskify/models/task_model.dart';
-import 'package:taskify/pages/add-Task-Screen.dart';
+import 'package:taskify/pages/screen/add-Task-Screen.dart';
+
 import 'package:taskify/pages/widgets/achieved_tasks_widget.dart';
 import 'package:taskify/pages/widgets/highprioritytasks_widget.dart';
+import 'package:taskify/pages/widgets/sliver-task-list-widget.dart';
 import 'package:taskify/pages/widgets/task-list-widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -217,151 +219,45 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
              
+             
+           
         
 
               ],
             ),
           ),
-          //  if (tasks.isNotEmpty) Column(children: [
-               
-             
-          //     ],
-          //    ),
+      
 
-              SliverFillRemaining(
-                child: isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      )
-                    : Tasklistwidgets(
-                        tasks: tasks,
-                        onTap: (bool? value, int? index){
-                          _doneTask(value,index);
-                        }, emptyMessage: 'no data',
-                        
-                         
-                          ),
-              ),
-          
-         ],
-        
-        
-          // child: Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Row(
-          //       children: [
-          //         CircleAvatar(
-          //           backgroundImage: AssetImage('assets/image/person.png'),
-          //         ),
-          //         SizedBox(width: 10),
-          //         Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             Text(
-          //               "Good Evening ,$username",
-          //               style: TextStyle(
-          //                 fontSize: 16,
-          //                 fontWeight: FontWeight.w400,
-          //                 color: Color(0xffFFFCFC),
-          //               ),
-          //             ),
-          //             SizedBox(height: 4),
-          //             Text(
-          //               "One task at a time.One step closer.",
-          //               style: TextStyle(
-          //                 fontSize: 14,
-          //                 fontWeight: FontWeight.w400,
-          //                 color: Color(0xffC6C6C6),
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ],
-          //     ),
-        
-              // SizedBox(height: 16),
-              // Text(
-              //   "Yuhuu ,Your work Is ",
-        
-              //   style: TextStyle(
-              //     fontSize: 32,
-              //     fontWeight: FontWeight.w400,
-              //     color: Color(0XFFFFFCFC),
-              //   ),
-              // ),
-        
-              // Row(
-              //   children: [
-              //     Text(
-              //       "almost done !",
-              //       style: TextStyle(
-              //         fontSize: 32,
-              //         fontWeight: FontWeight.w400,
-              //         color: Color(0XFFFFFCFC),
-              //       ),
-              //     ),
-              //     SvgPicture.asset('assets/svg/hand.svg'),
-              //   ],
-              // ),
-              // SizedBox(height: 16),
-        
-              // AchievedTasksWidget(
-              //   totalTask: totalTask,
-              //   doneTask: doneTask,
-              //   percent: percent,
-              // ),
-              // SizedBox(height: 8),
-              // HighprioritytasksWidget(
-              //   tasks: tasks,
-        
-              //   onTap: (bool? value, int? index) {
-              //     _doneTask(value, index);
-              //   }, refresh: (){
-              //     _LoadTask();
-              //   },
-              // ),
-        
-              // Padding(
-              //   padding: EdgeInsets.only(top: 24, bottom: 16),
-              //   child: Text(
-              //     "My Tasks",
-              //     style: TextStyle(
-              //       fontSize: 20,
-              //       fontWeight: FontWeight.w400,
-              //       color: Color(0XFFFFFCFC),
-              //     ),
-              //   ),
-              // ),
-        
-              // Expanded(
-              //   child: isLoading
-              //       ? Center(
-              //           child: CircularProgressIndicator(color: Colors.white),
-              //         )
-              //       : Tasklistwidgets(
-              //           tasks: tasks,
-              //           onTap: (bool? value, int? index){
-              //             _doneTask(value,index);
-              //           }, emptyMessage: 'no data',
-                        
-                         
-              //             ),
-              // ),
-        
-                         
-                      
-                        
-                      
-              
-        
-            //   if (tasks.isNotEmpty) Column(children: [
-               
-             
-            //   ],
-            //  ),
-          
+
+
+
+
+       if (isLoading)
+      SliverToBoxAdapter(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 24),
+            child: CircularProgressIndicator(color: Colors.white),
           ),
+        ),
+      )
+    else
+      sliverTasklistwidgets(   // لاحظ الاسم CamelCase
+        tasks: tasks,
+        onTap: (bool? value, int? index) {
+          _doneTask(value, index);
+        },
+        emptyMessage: 'no data',
+      ),
+  ],
+),
+
+        
+          
+      
+        
+        
+        
         
      
    );
