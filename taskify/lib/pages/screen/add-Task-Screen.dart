@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/widget/custom_text_form_faild.dart';
 import 'dart:convert';
 
@@ -107,19 +107,9 @@ class _addTaskState extends State<AddTaskScreen> {
               
              
               if( _key.currentState?.validate()??false){
-                // Navigator.of(context).pop();
-                
-                //save data{SharedPreferences}
-                //افتح الدرج
-               final pref= await SharedPreferences.getInstance();
-               //check by key{tasks}
-               //getString return string
-               
-              final taskjson= pref.getString('tasks');
-                //هنا عملت ليست علشان اجيب التاسك القديمة
-              // نجهز لست فاضية مؤقتًا عشان نحط فيها المهام القديمة + الجديدة
-               // خُدي الورقة باسم "tasks" (String أو null)
-              //
+           
+                  final taskjson= PreferencesManager().getString('tasks');
+
               List<dynamic> ListTasks=[];
               // لو مفيش ورقة → رجّعي قائمة فاضية
               if(taskjson !=null){
@@ -145,7 +135,8 @@ class _addTaskState extends State<AddTaskScreen> {
               print(taskjson);
 
                final taskEncode = jsonEncode(ListTasks);
-              await pref.setString("tasks",taskEncode);
+             await  PreferencesManager().setString("tasks",taskEncode);
+             
                print(taskEncode);
             
 
@@ -155,8 +146,7 @@ class _addTaskState extends State<AddTaskScreen> {
               }
              }, 
                style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0XFF15B86C),
-                foregroundColor: Color(0xffFFFCFC),
+                
                 fixedSize: Size(MediaQuery.of(context).size.width,40)
 
 

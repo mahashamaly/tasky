@@ -14,7 +14,7 @@ final  double percent;
     width: double.infinity,
     padding: EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Color(0xff282828),
+   color: Theme.of(context).colorScheme.primaryContainer,
       borderRadius: BorderRadius.circular(20),
     ),
     child: Row(
@@ -23,11 +23,16 @@ final  double percent;
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Achieved Tasks",style: TextStyle(fontSize:16 ,fontWeight:FontWeight.w400,color: Color(0XffFFFCFC)),),
+            Text("Achieved Tasks",
+            style:Theme.of(context).textTheme.titleMedium ,
+         
+            
+            
+            ),
             SizedBox(
               height: 4,
             ),
-            Text("${doneTask} Out of ${totalTask} Done",style: TextStyle(fontSize:14 ,fontWeight:FontWeight.w400,color: Color(0XffC6C6C6)),),
+            Text("${doneTask} Out of ${totalTask} Done",style: Theme.of(context).textTheme.titleSmall),
           ],
         ),
         Stack(
@@ -46,7 +51,9 @@ final  double percent;
                      ),
            ),
          ),
-        Text("${((percent*100).toInt())} %",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ,color: Color(0xffFFFCFC)),)
+        Text("${((percent*100).toInt())} %",
+        
+        style:Theme.of(context).textTheme.titleMedium ),
           ],
         )
       ],

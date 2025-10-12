@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:taskify/core/widget/custom-checkBox.dart';
 import 'package:taskify/models/task_model.dart';
 import 'package:taskify/pages/screen/highpriority_screen.dart';
 
@@ -18,7 +19,8 @@ class HighprioritytasksWidget extends StatelessWidget {
     return Container(
     
       decoration: BoxDecoration(
-        color: Color(0Xff282828),
+       // color: Color(0Xff282828),
+       color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -44,33 +46,21 @@ class HighprioritytasksWidget extends StatelessWidget {
                 ...tasks.reversed.where((e)=>e.HighPriority).take(4).map((element) {
                   return Row(
                     children: [
-                      Checkbox(
-                        activeColor: Color(0XFF15B86C),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        value: element.isDone,
-                        onChanged: (bool? value) {
+                    Customcheckbox(value: element.isDone, onChanged:(bool? value) {
                           final index = tasks.indexWhere((e) {
                             return e.id == element.id;
                           });
                           onTap(value, index);
-                        },
-                      ),
+                        }, ),
+
+
                      
+                     /////////
                       Flexible(
                         child: Text(
                           element.taskName,
-                          style: TextStyle(
-                            color: element.isDone
-                                ? Color(0XFFA0A0A0)
-                                : Color(0XFFFFFCFC),
-                            fontSize: 16,
-                            decoration: element.isDone
-                                ? TextDecoration.lineThrough
-                                : TextDecoration.none,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                         style:element.isDone?Theme.of(context).textTheme.titleLarge:Theme.of(context).textTheme.titleMedium,
+                    
                           maxLines: 1,
                         ),
                       ),
@@ -96,11 +86,12 @@ class HighprioritytasksWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Container(
-              height: 40,
-              width: 40,
+              height: 56,
+              width: 48,
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-             color: Color(0Xff282828),
+                 color: Theme.of(context).colorScheme.primaryContainer,
+            // color: Color(0Xff282828),
              shape: BoxShape.circle,
              border: Border.all(color: Color(0XFF6E6E6E))
               ),

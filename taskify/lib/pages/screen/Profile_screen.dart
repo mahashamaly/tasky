@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taskify/core/services/Preferences_manager.dart';
+import 'package:taskify/main.dart';
 import 'package:taskify/pages/screen/user_details_screen.dart';
+import 'package:taskify/pages/screen/welcome_screen.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -12,20 +15,27 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  late final String username;
+late  String username;
+late String MotivationQuote;
+
+ 
+
+  
   bool isloading = true;
   bool isDarkMode= true;
 
   void initState() {
     super.initState();
-    _LoadUserName();
+    _loadData();
   }
 
-  void _LoadUserName() async {
-    final pref = await SharedPreferences.getInstance();
+  void _loadData() async {
     //استخدام ست ستيت لتحديث واجهة الصفحة بعد تحميل الاسم.
     setState(() {
-      username = pref.getString('username') ?? '';
+     username= PreferencesManager().getString('username')??'';
+     // username = pref.getString('username') ?? '';
+      // MotivationQuote = pref.getString()??"One task at a time. One step closer." ;
+      MotivationQuote=PreferencesManager().getString('MotivationQuote')??"One task at a time. One step closer.";
       isloading = false;
     });
 
@@ -94,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                       Text(
-                        "One task at a time. One step closer.",
+                      MotivationQuote ,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -119,15 +129,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
 
             ListTile(
-              onTap: (){
-                Navigator.push(context,
+              onTap: ()async{
+               final result=await Navigator.push(context,
                  MaterialPageRoute(
                   builder: (BuildContext context){
-                  return  UserDetailsScreen();
+                  return  UserDetailsScreen(userName: username, MotivationQuote: MotivationQuote);
+                     
 
-                }
-                )
+
+                  
+               } )
                 );
+                if(result!=null&&result){
+                  _loadData();
+                }
                 
               },
               contentPadding: EdgeInsets.all(0),
@@ -156,7 +171,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
              
                 onChanged: (bool value){
                   setState(() {
-                  isDarkMode=value;
+                       isDarkMode=value;
+                       if(isDarkMode){
+                    themeNotifier.value=ThemeMode.light;
+
+                       }else{
+                       themeNotifier.value=ThemeMode.dark;
+
+                       }
+                   
+               
                   });
                  }
                 ),
@@ -166,8 +190,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Divider( color: Color(0xfff6E6E6E),thickness: 1,),
 
                  ListTile(
-                  onTap: () {
+                  onTap: () async{
                     
+                    PreferencesManager().remove("username");
+                    PreferencesManager().remove("MotivationQuote");
+                    PreferencesManager().remove("tasks");
+                    
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context){
+                      return WelcomeScreen();
+
+                    })
+                     
+                    );
                   },
               contentPadding: EdgeInsets.all(0),
               title: Text("Log Out",style: TextStyle(fontSize:16 ,fontWeight: FontWeight.w400,color: Color(0xfffFFFCFC)),),

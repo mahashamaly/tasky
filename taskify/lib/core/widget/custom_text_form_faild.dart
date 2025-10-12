@@ -33,23 +33,11 @@ class CustomTextFormFaild extends StatelessWidget {
         TextFormField(
           controller: controller,
           maxLines: maxLines,
-          style: TextStyle(color: Colors.white),
-
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: Color(0xff6D6D6D),
+          style: Theme.of(context).textTheme.labelMedium,
+            decoration: InputDecoration(
+              hintText: hintText,
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide.none,
-            ),
-
-            filled: true,
-            fillColor: Color(0xff282828),
-          ),
+   
           validator: validator != null
               ? (String? value) => validator!(value)
               : null,

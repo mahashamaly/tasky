@@ -3,7 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/models/task_model.dart';
 import 'package:taskify/pages/screen/add-Task-Screen.dart';
 
@@ -41,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     //await  Future.delayed(Duration(seconds: 5));
-    final pref = await SharedPreferences.getInstance();
-    final finalTask = pref.getString('tasks');
+    final finalTask=PreferencesManager().getString('tasks');
+    
     //هنا لو رجع نل ما فى بيانات ما نكمل الكود لو فيه بيانات ندخل ونعالجها
 
     if (finalTask != null) {
@@ -75,17 +76,20 @@ class _HomeScreenState extends State<HomeScreen> {
       tasks[index!].isDone = value ?? false;
       _calPersent();
     });
-
-    final pref = await SharedPreferences.getInstance();
+          
+    //final pref = await SharedPreferences.getInstance();
     final updateTask = tasks.map((e) => e.toJson()).toList();
-    pref.setString('tasks', jsonEncode(updateTask));
+    PreferencesManager().setString('tasks', jsonEncode(updateTask));
+    //pref.setString('tasks', jsonEncode(updateTask));
   }
 
   void _LoadUserName() async {
-    final pref = await SharedPreferences.getInstance();
+    
     //استخدام ست ستيت لتحديث واجهة الصفحة بعد تحميل الاسم.
     setState(() {
-      username = pref.getString('username') ?? '';
+
+     username= PreferencesManager().getString('username')??'';
+      //username = pref.getString('username') ?? '';
     });
 
     print("username == $username");
@@ -128,104 +132,94 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      backgroundColor: Color(0xff181818),
+     
       body: CustomScrollView(
          slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                  Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/image/person.png'),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Good Evening ,$username",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xffFFFCFC),
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "One task at a time.One step closer.",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xffC6C6C6),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-         SizedBox(height: 16),
-              Text(
-                "Yuhuu ,Your work Is ",
-        
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0XFFFFFCFC),
-                ),
-              ),
-         Row(
-                children: [
-                  Text(
-                    "almost done !",
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0XFFFFFCFC),
-                    ),
-                  ),
-                  SvgPicture.asset('assets/svg/hand.svg'),
-                ],
-              ),
-              SizedBox(height: 16),
-        
-            
-              AchievedTasksWidget(
-                totalTask: totalTask,
-                doneTask: doneTask,
-                percent: percent,
-              ),
-              SizedBox(height: 8),
-              HighprioritytasksWidget(
-                tasks: tasks,
-        
-                onTap: (bool? value, int? index) {
-                  _doneTask(value, index);
-                }, refresh: (){
-                  _LoadTask();
-                },
-              ),
-        
-              Padding(
-                padding: EdgeInsets.only(top: 24, bottom: 16),
-                child: Text(
-                  "My Tasks",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0XFFFFFCFC),
-                  ),
-                ),
-              ),
-             
-             
-           
-        
-
-              ],
-            ),
-          ),
+           SliverToBoxAdapter(
+             child: Padding(
+               padding: const EdgeInsets.all(16),
+               child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                     Row(
+                   children: [
+                     CircleAvatar(
+                       backgroundImage: AssetImage('assets/image/person.png'),
+                     ),
+                     SizedBox(width: 10),
+                     Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         Text(
+                           "Good Evening ,$username",
+                        style:Theme.of(context).textTheme.titleMedium,
+                           
+                         ),
+                         SizedBox(height: 4),
+                         Text(
+                           "One task at a time.One step closer.",
+                           style:Theme.of(context).textTheme.titleSmall,
+                           
+                         ),
+                       ],
+                     ),
+                   ],
+                 ),
+                      SizedBox(height: 16),
+                 Text(
+                   "Yuhuu ,Your work Is ",
+                   style:Theme.of(context).textTheme.displayLarge,
+                     
+                 ),
+                      Row(
+                   children: [
+                     Text(
+                       "almost done !",
+                            style:Theme.of(context).textTheme.displayLarge,
+                       
+                     ),
+                     SvgPicture.asset('assets/svg/hand.svg'),
+                   ],
+                 ),
+                 SizedBox(height: 16),
+                     
+               
+                 AchievedTasksWidget(
+                   totalTask: totalTask,
+                   doneTask: doneTask,
+                   percent: percent,
+                 ),
+                 SizedBox(height: 8),
+                 HighprioritytasksWidget(
+                   tasks: tasks,
+                     
+                   onTap: (bool? value, int? index) {
+                     _doneTask(value, index);
+                   }, refresh: (){
+                     _LoadTask();
+                   },
+                 ),
+                     
+                 Padding(
+                   padding: EdgeInsets.only(top: 24, bottom: 16),
+                   child: Text(
+                     "My Tasks",
+                     style: TextStyle(
+                       fontSize: 20,
+                       fontWeight: FontWeight.w400,
+                       color: Color(0XFFFFFCFC),
+                     ),
+                   ),
+                 ),
+                
+                
+                           
+                     
+                          
+                 ],
+               ),
+             ),
+           ),
       
 
 

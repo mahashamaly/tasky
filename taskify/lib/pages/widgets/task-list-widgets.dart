@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taskify/core/widget/custom-checkBox.dart';
+
 import 'package:taskify/models/task_model.dart';
 
 class Tasklistwidgets extends StatelessWidget {
@@ -43,16 +44,11 @@ class Tasklistwidgets extends StatelessWidget {
                         child: Row(
                           children: [
                              SizedBox(width: 8),
-                            Checkbox(
-                              activeColor: Color(0XFF15B86C),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              value: tasks[index].isDone,
-                             onChanged: (bool? value) {
+
+                             Customcheckbox(value:  tasks[index].isDone, onChanged: (bool? value) {
                               onTap(value,index);
-                               },
-                           ),
+                               },),
+                         
                           SizedBox(width: 16),
                            Expanded(
                               child: Column(

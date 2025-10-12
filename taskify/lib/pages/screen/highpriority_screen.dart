@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/models/task_model.dart';
 import 'package:taskify/pages/widgets/task-list-widgets.dart';
 
@@ -28,10 +29,8 @@ List<TaskModel> HighPriorityTasks = [];
     setState(() {
       isLoading = true;
     });
-
-    final pref = await SharedPreferences.getInstance();
-    final finalTask = pref.getString('tasks');
-
+     final finalTask = PreferencesManager().getString('tasks');
+    
     if (finalTask != null && finalTask.isNotEmpty) {
       final taskAfterDecode = jsonDecode(finalTask) as List<dynamic>;
 
@@ -76,10 +75,10 @@ body:  Padding(
                         setState(() {
                         HighPriorityTasks[index!].isDone = value ?? false;
                         });
-      
-                        final pref = await SharedPreferences.getInstance();
+                     final allData= PreferencesManager().getString('tasks');
+                        //final pref = await SharedPreferences.getInstance();
                         // final updateTask = tasks.map((e) => e.toJson()).toList();
-                        final allData = pref.getString('tasks');
+                        //final allData = pref.getString('tasks');
                         if (allData != null) {
                           List<TaskModel> allDataList =
                               (jsonDecode(allData) as List)
@@ -90,7 +89,8 @@ body:  Padding(
                             (e) => e.taskName == HighPriorityTasks[index!].taskName,
                           );
                           allDataList[newIndex] = HighPriorityTasks[index!];
-                          pref.setString('tasks', jsonEncode(allDataList));
+                        await  PreferencesManager().setString('tasks', jsonEncode(allDataList));
+                          //pref.setString('tasks', jsonEncode(allDataList));
                           _loadTask();
                         }
                       },

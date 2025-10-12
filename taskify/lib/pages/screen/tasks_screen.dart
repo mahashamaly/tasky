@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/models/task_model.dart';
 
 import 'package:taskify/pages/widgets/task-list-widgets.dart';
@@ -28,8 +29,9 @@ class _TasksScreenState extends State<TasksScreen> {
       isLoading = true;
     });
 
-    final pref = await SharedPreferences.getInstance();
-    final finalTask = pref.getString('tasks');
+final finalTask =PreferencesManager().getString('tasks');
+    // final pref = await SharedPreferences.getInstance();
+    // final finalTask = pref.getString('tasks');
 
     if (finalTask != null && finalTask.isNotEmpty) {
       final taskAfterDecode = jsonDecode(finalTask) as List<dynamic>;
@@ -81,9 +83,10 @@ class _TasksScreenState extends State<TasksScreen> {
                         todoTasks[index!].isDone = value ?? false;
                       });
     
-                      final pref = await SharedPreferences.getInstance();
+                      
                       // final updateTask = tasks.map((e) => e.toJson()).toList();
-                      final allData = pref.getString('tasks');
+                       final allData=PreferencesManager().getString('tasks');
+                     
                       if (allData != null) {
                         List<TaskModel> allDataList =
                             (jsonDecode(allData) as List)
@@ -94,7 +97,8 @@ class _TasksScreenState extends State<TasksScreen> {
                           (e) => e.taskName == todoTasks[index!].taskName,
                         );
                         allDataList[newIndex] = todoTasks[index!];
-                        pref.setString('tasks', jsonEncode(allDataList));
+                        await PreferencesManager().setString('tasks', jsonEncode(allDataList));
+                        //pref.setString('tasks', jsonEncode(allDataList));
                         _loadTask();
                       }
                     },
