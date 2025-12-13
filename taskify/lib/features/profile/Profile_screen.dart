@@ -8,8 +8,8 @@ import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/theme/themeController.dart';
 import 'package:taskify/core/widget/custom-svg-picture.dart';
 import 'package:taskify/main.dart';
-import 'package:taskify/pages/screen/user_details_screen.dart';
-import 'package:taskify/pages/screen/welcome_screen.dart';
+import 'package:taskify/features/profile/user_details_screen.dart';
+import 'package:taskify/features/welcome/welcome_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

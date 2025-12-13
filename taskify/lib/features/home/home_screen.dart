@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/widget/custom-svg-picture.dart';
 import 'package:taskify/models/task_model.dart';
-import 'package:taskify/pages/screen/add-Task-Screen.dart';
+import 'package:taskify/features/add_task/add-Task-Screen.dart';
 
-import 'package:taskify/pages/widgets/achieved_tasks_widget.dart';
-import 'package:taskify/pages/widgets/highprioritytasks_widget.dart';
-import 'package:taskify/pages/widgets/sliver-task-list-widget.dart';
-import 'package:taskify/pages/widgets/task-list-widgets.dart';
+import 'package:taskify/features/home/components/achieved_tasks_widget.dart';
+import 'package:taskify/features/home/highprioritytasks_widget.dart';
+import 'package:taskify/features/home/components/sliver-task-list-widget.dart';
+import 'package:taskify/core/components/task-list-widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

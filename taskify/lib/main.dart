@@ -4,8 +4,8 @@ import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/theme/dark-theme.dart';
 import 'package:taskify/core/theme/light_theme.dart';
 import 'package:taskify/core/theme/themeController.dart';
-import 'package:taskify/pages/screen/main_Secreen.dart';
-import 'package:taskify/pages/screen/welcome_screen.dart';
+import 'package:taskify/features/navigation/main_Secreen.dart';
+import 'package:taskify/features/welcome/welcome_screen.dart';
 
 
 

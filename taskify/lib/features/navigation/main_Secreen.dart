@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:taskify/pages/screen/Profile_screen.dart';
-import 'package:taskify/pages/screen/completed_tasks_screen.dart';
-import 'package:taskify/pages/screen/home_screen.dart';
-import 'package:taskify/pages/screen/tasks_screen.dart';
+import 'package:taskify/features/profile/Profile_screen.dart';
+import 'package:taskify/features/tasks/completed_tasks_screen.dart';
+import 'package:taskify/features/home/home_screen.dart';
+import 'package:taskify/features/tasks/tasks_screen.dart';
 
 
 

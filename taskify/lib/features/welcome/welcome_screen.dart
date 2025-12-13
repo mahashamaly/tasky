@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/widget/custom-svg-picture.dart';
 import 'package:taskify/core/widget/custom_text_form_faild.dart';
-import 'package:taskify/pages/screen/main_Secreen.dart';
+import 'package:taskify/features/navigation/main_Secreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({super.key});

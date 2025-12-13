@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:taskify/core/widget/custom-checkBox.dart';
 
 import 'package:taskify/models/task_model.dart';
-import 'package:taskify/pages/widgets/task_item-widget.dart';
+import 'package:taskify/core/components/task_item-widget.dart';
 
 class Tasklistwidgets extends StatelessWidget {
   const Tasklistwidgets({super.key,required this.tasks, required this.onTap,required this.emptyMessage, required this.onDelete,required this.onEdit});

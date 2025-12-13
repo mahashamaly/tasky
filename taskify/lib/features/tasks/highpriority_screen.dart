@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/models/task_model.dart';
-import 'package:taskify/pages/widgets/task-list-widgets.dart';
+import 'package:taskify/core/components/task-list-widgets.dart';
 
 class HighpriorityScreen extends StatefulWidget {
   const HighpriorityScreen({super.key});
