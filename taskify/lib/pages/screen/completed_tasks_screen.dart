@@ -27,7 +27,8 @@ List<TaskModel> completTasks = [];
     setState(() {
       isLoading = true;
     });
-   final finalTask = PreferencesManager().getString('task');
+  //  *********************
+   final finalTask = PreferencesManager().getString('tasks');
 
     
     if (finalTask != null && finalTask.isNotEmpty) {
@@ -48,6 +49,27 @@ List<TaskModel> completTasks = [];
     }
   }
 
+//وظيفتها: حذف مهمة من SharedPreferences ومن القائمة المعروضة في الشاشة.
+ _deleteTask(int?id) async {
+    List<TaskModel>tasks=[];
+    if(id==null)return;
+   final finalTask = PreferencesManager().getString('tasks');
+ if (finalTask != null && finalTask.isNotEmpty) {
+      final taskAfterDecode = jsonDecode(finalTask) as List<dynamic>;
+      tasks=taskAfterDecode.map((element)=>TaskModel.fromJson(element)).toList();
+      tasks.removeWhere((e)=>e.id==id);
+      }
+    
+
+   setState(() {
+     completTasks.removeWhere((task)=>task.id==id);
+ 
+   });
+   //هنا علشان اضمن انها انحذفت من التطبيق كامل
+     final updateTask = tasks.map((e) => e.toJson()).toList();
+    PreferencesManager().setString('tasks', jsonEncode(updateTask));
+  }
+
 
 
 
@@ -61,7 +83,7 @@ List<TaskModel> completTasks = [];
    
   Padding(
    padding: const EdgeInsets.all(18),
-   child: Text("Completed Tasks",style: TextStyle(fontSize: 20,color: Color(0XFFFFFCFC)),),
+   child: Text("Completed Tasks",style: Theme.of(context).textTheme.labelSmall),
  ),
  
  
@@ -104,7 +126,11 @@ List<TaskModel> completTasks = [];
                     _loadTask();
                   }
        
-              },emptyMessage: 'NO Task Found',
+              },emptyMessage: 'NO Task Found', onDelete: (int? id ) { 
+                _deleteTask(id);
+               }, onEdit:(){
+                _loadTask();
+               } ,
        
        
              )

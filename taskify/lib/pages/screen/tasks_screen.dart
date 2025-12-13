@@ -53,6 +53,34 @@ final finalTask =PreferencesManager().getString('tasks');
     }
   }
 
+
+
+
+
+
+
+
+
+ _deleteTask(int?id) async {
+    List<TaskModel>tasks=[];
+    if(id==null)return;
+   final finalTask = PreferencesManager().getString('tasks');
+ if (finalTask != null && finalTask.isNotEmpty) {
+      final taskAfterDecode = jsonDecode(finalTask) as List<dynamic>;
+      tasks=taskAfterDecode.map((element)=>TaskModel.fromJson(element)).toList();
+      tasks.removeWhere((e)=>e.id==id);
+      }
+    
+
+   setState(() {
+     todoTasks.removeWhere((task)=>task.id==id);
+ 
+   });
+     final updateTask = tasks.map((e) => e.toJson()).toList();
+    PreferencesManager().setString('tasks', jsonEncode(updateTask));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -61,8 +89,7 @@ final finalTask =PreferencesManager().getString('tasks');
         Padding(
           padding: const EdgeInsets.all(18),
           child: Text(
-            "To Do Tasks",
-            style: TextStyle(fontSize: 20, color: Color(0XFFFFFCFC)),
+            "To Do Tasks",style: Theme.of(context).textTheme.labelSmall,
           ),
         ),
     
@@ -102,7 +129,11 @@ final finalTask =PreferencesManager().getString('tasks');
                         _loadTask();
                       }
                     },
-                    emptyMessage: 'NO Tak Found',
+                    emptyMessage: 'NO Tak Found', onDelete: (int?id ) { 
+                      _deleteTask(id);
+                     }, onEdit: (){
+                      _loadTask();
+                     }, 
                   ),
           ),
         ),

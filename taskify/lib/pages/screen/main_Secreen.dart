@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:taskify/pages/screen/Profile_screen.dart';
 import 'package:taskify/pages/screen/completed_tasks_screen.dart';
 import 'package:taskify/pages/screen/home_screen.dart';
 import 'package:taskify/pages/screen/tasks_screen.dart';
+
+
 
 
 class MainSecreen extends StatefulWidget {
@@ -37,36 +40,39 @@ ProfileScreen(),
 
         },
         
-        backgroundColor: Color(0xff181818),
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0Xff15B86C),
-        unselectedItemColor: Color(0xffC6C6C6),
+        // backgroundColor: Color(0xff181818),
+        // type: BottomNavigationBarType.fixed,
+        // selectedItemColor: Color(0Xff15B86C),
+        // unselectedItemColor: Color(0xffC6C6C6),
         
         
         items: [
-        BottomNavigationBarItem(icon:SvgPicture.asset("assets/svg/home.svg",
-        colorFilter: ColorFilter.mode(
-         _currentindex== 0? Color(0Xff15B86C):Color(0xffC6C6C6),
-         BlendMode.srcIn),),
+        BottomNavigationBarItem(icon:_buildSvgPicture('assets/svg/home.svg',0),
         label: "Home" 
         ),
-       BottomNavigationBarItem(icon:SvgPicture.asset("assets/svg/todo.svg",
-       colorFilter: ColorFilter.mode(
-       _currentindex==1? Color(0Xff15B86C):Color(0xffC6C6C6), BlendMode.srcIn)),
+       BottomNavigationBarItem(icon:_buildSvgPicture('assets/svg/todo.svg',1),
         label: "To Do" ),
-         BottomNavigationBarItem(icon:SvgPicture.asset("assets/svg/Completed.svg",
-         colorFilter: 
-         ColorFilter.mode(
-         _currentindex==2? Color(0Xff15B86C):Color(0xffC6C6C6), BlendMode.srcIn),),
+
+
+         BottomNavigationBarItem(icon:_buildSvgPicture('assets/svg/Completed.svg',2),
          label: "Completed" ),
-         BottomNavigationBarItem(icon:SvgPicture.asset("assets/svg/Profile.svg",
-         colorFilter: ColorFilter.mode(
-        _currentindex==3?  Color (0Xff15B86C):Color(0xffC6C6C6), BlendMode.srcIn),),
+         BottomNavigationBarItem(icon:_buildSvgPicture('assets/svg/Profile.svg',3),
          label: "Profile" ),
          
       ]),
       body:SafeArea(child: _screen [_currentindex]),
 
     );
+  }
+
+
+
+  SvgPicture _buildSvgPicture(String path, int index){
+    return SvgPicture.asset(path,
+        colorFilter: ColorFilter.mode(
+         _currentindex== index? Color(0Xff15B86C):Color(0xffC6C6C6),
+         BlendMode.srcIn),
+         );
+     
   }
 }

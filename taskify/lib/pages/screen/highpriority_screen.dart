@@ -17,6 +17,7 @@ class HighpriorityScreen extends StatefulWidget {
 class _HighpriorityScreenState extends State<HighpriorityScreen> {
 List<TaskModel> HighPriorityTasks = [];
   bool isLoading = false;
+  
 
 
   @override
@@ -51,6 +52,26 @@ List<TaskModel> HighPriorityTasks = [];
       });
     }
   }
+  
+  _deleteTask(int?id) async {
+    List<TaskModel>tasks=[];
+    if(id==null)return;
+   final finalTask = PreferencesManager().getString('tasks');
+ if (finalTask != null && finalTask.isNotEmpty) {
+      final taskAfterDecode = jsonDecode(finalTask) as List<dynamic>;
+      tasks=taskAfterDecode.map((element)=>TaskModel.fromJson(element)).toList();
+      tasks.removeWhere((e)=>e.id==id);
+      }
+    
+
+   setState(() {
+     HighPriorityTasks.removeWhere((task)=>task.id==id);
+ 
+   });
+     final updateTask = tasks.map((e) => e.toJson()).toList();
+    PreferencesManager().setString('tasks', jsonEncode(updateTask));
+  }
+
 
 
 
@@ -94,7 +115,11 @@ body:  Padding(
                           _loadTask();
                         }
                       },
-                      emptyMessage: 'NO Task Found',
+                      emptyMessage: 'NO Task Found', onDelete: (int? id ) { 
+                        _deleteTask(id);
+                       }, onEdit: (){
+                        _loadTask();
+                       },
                     ),
 ),
 

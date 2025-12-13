@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
+import 'package:taskify/core/theme/themeController.dart';
 import 'package:taskify/core/widget/custom-checkBox.dart';
+import 'package:taskify/core/widget/custom-svg-picture.dart';
 import 'package:taskify/models/task_model.dart';
 import 'package:taskify/pages/screen/highpriority_screen.dart';
 
@@ -93,12 +95,10 @@ class HighprioritytasksWidget extends StatelessWidget {
                  color: Theme.of(context).colorScheme.primaryContainer,
             // color: Color(0Xff282828),
              shape: BoxShape.circle,
-             border: Border.all(color: Color(0XFF6E6E6E))
+             border: Border.all(color:Themecontroller.isDark()?Color(0XFF6E6E6E):Color(0xffD1DAD6)),
               ),
-              child:SvgPicture.asset('assets/svg/arrow-up-right.svg',
-              height: 24,
-              width: 24,
-              )
+              child:Customsvgpicture(path: 'assets/svg/arrow-up-right.svg',height: 24,width: 24,)
+            
             ),
           ),
         ),

@@ -6,6 +6,7 @@ useMaterial3: true,
 brightness: Brightness.light,
 colorScheme: ColorScheme.light(
   primaryContainer: Color(0xFFFFFFFF),
+  secondary: Color(0xff3A4640),
   
 
 ),
@@ -18,7 +19,7 @@ colorScheme: ColorScheme.light(
             color: Color(0XFF161F1B),
           ),
           centerTitle: false,
-          iconTheme: IconThemeData(color: Color(0xff161F1B)),
+           iconTheme: IconThemeData(color: Color(0xff161F1B)),
         ),
         switchTheme: SwitchThemeData(
           trackColor: WidgetStateProperty.resolveWith((States) {
@@ -52,12 +53,30 @@ colorScheme: ColorScheme.light(
 elevatedButtonTheme: ElevatedButtonThemeData(
 style: ButtonStyle(
   
-  backgroundColor:MaterialStateProperty.all(Color(0xff15B86C)) ,
-  foregroundColor: MaterialStateProperty.all(Color(0xffFFFCFC))
+  backgroundColor:WidgetStateProperty.all(Color(0xff15B86C)) ,
+  foregroundColor: WidgetStateProperty.all(Color(0xffFFFCFC)),
+  textStyle:WidgetStateProperty.all(
+TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w500
+)
+  ),
 
 )
 
 ),
+
+floatingActionButtonTheme: FloatingActionButtonThemeData(
+ backgroundColor: Color(0xff15B86C),
+   foregroundColor: Color(0xffFFFCFC),
+   extendedTextStyle: TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500
+   )
+
+),
+
+
 
 
 
@@ -76,6 +95,11 @@ textTheme: TextTheme(
 labelMedium: TextStyle(
   color: Colors.black,
   fontSize: 16
+),
+labelSmall: TextStyle(
+      fontSize: 20,
+       fontWeight: FontWeight.w400,
+       color: Color(0XFF161F1B),
 ),
 displayLarge: TextStyle(
   fontSize: 32,
@@ -159,6 +183,58 @@ checkboxTheme: CheckboxThemeData(
       width: 2,
     )
 ),
+
+
+textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all(Colors.black),
+      textStyle: MaterialStateProperty.all(
+        TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      ),
+    ),
+),
+
+
+listTileTheme: ListTileThemeData(
+  titleTextStyle: TextStyle(
+  color: Color(0xff161F1B),
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  )
+),
+
+
+dividerTheme: DividerThemeData(
+  color: Color(0xffD1DAD6)
+),
+
+textSelectionTheme: TextSelectionThemeData(
+  cursorColor: Colors.black,
+  selectionColor: Colors.white,
+  selectionHandleColor: Colors.black
+),
+bottomNavigationBarTheme: BottomNavigationBarThemeData(
+   backgroundColor: Color(0xffF6F7F9),
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Color(0Xff14A662),
+        unselectedItemColor: Color(0Xff3A4640),
+        
+
+),
+splashFactory: NoSplash.splashFactory,
+popupMenuTheme: PopupMenuThemeData(
+  color:Color(0xffF6F7F9),
+  shape: RoundedRectangleBorder(
+   
+    borderRadius: BorderRadius.circular(16)),
+    elevation: 2,
+    shadowColor:  Color(0xFF15B86C),
+    labelTextStyle: WidgetStateProperty.all(TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w400,
+      color: Colors.black
+    ))
+)
 );
 
 

@@ -3,15 +3,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:taskify/core/widget/custom-checkBox.dart';
 import 'package:taskify/models/task_model.dart';
+import 'package:taskify/pages/widgets/task_item-widget.dart';
 
 class  sliverTasklistwidgets extends StatelessWidget {
-  const sliverTasklistwidgets({super.key,required this.tasks, required this.onTap,required this.emptyMessage});
+  const sliverTasklistwidgets({super.key,required this.tasks, required this.onTap,required this.emptyMessage, required this.onDelete, required this.onEdit});
   final List<TaskModel> tasks;
 
   //دالة تأخذ قيمة الـ checkbox و index لتحديث المهمة.
   final Function(bool?,int?) onTap;
-
+  final Function(int?)onDelete; 
    final String emptyMessage;
+   final Function onEdit;
 
   @override
   Widget build(BuildContext context) {
@@ -32,62 +34,21 @@ class  sliverTasklistwidgets extends StatelessWidget {
                      separatorBuilder: (context, index) => SizedBox(height: 8),
                     itemBuilder: (BuildContext context, int index) {
                       final task = tasks[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Container(
-                          alignment: Alignment.center,
-                        height: 56,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Color(0xff282828),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            children: [
-                               SizedBox(width: 8),
-                                Customcheckbox(value: tasks[index].isDone , onChanged: (bool? value) {
-                                 onTap(value,index);
-                                  },),
-                          
-                            //     activeColor: Color(0XFF15B86C),
-                         
-                            SizedBox(width: 16),
-                             Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      task.taskName,
-                                      style: TextStyle(
-                                        color: task.isDone
-                                           ? Color(0XFFA0A0A0)
-                                            : Color(0XFFFFFCFC),
-                                        fontSize: 16,
-                                        decoration: task.isDone
-                                            ? TextDecoration.lineThrough
-                                            : TextDecoration.none,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      maxLines: 1,
-                                    ),
-                                    if (task.taskDescription.isNotEmpty)
-                                      Text(
-                                        task.taskDescription,
-                                        style: TextStyle(
-                                          color: Color(0XFFC6C6C6),
-                                          fontSize: 14,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        maxLines: 1,
-                                      ),
-                                  ],
-                                ),
-                              ),
-                           ],
-                          ),
-                        ),
-                      );
+                     // return Padding(
+                        //padding: const EdgeInsets.only(top: 8),
+                        return TaskItemwidget(model: tasks[index], 
+                        onChanged: (bool?value ) {  
+                              onTap(value,index);
+                        }, onDelete: (int id) { 
+                          onDelete(id);
+
+                         }, onEdit: (){
+                          onEdit();
+                         },
+                        
+                        
+                        );
+                     
                     },
                      
                    ),

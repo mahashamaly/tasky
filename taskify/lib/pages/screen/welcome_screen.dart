@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 
 import 'package:taskify/core/services/Preferences_manager.dart';
+import 'package:taskify/core/widget/custom-svg-picture.dart';
 import 'package:taskify/core/widget/custom_text_form_faild.dart';
 import 'package:taskify/pages/screen/main_Secreen.dart';
 
@@ -31,7 +32,8 @@ class _MyWidgetState extends State<WelcomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SvgPicture.asset('assets/svg/logo.svg'),
+                      Customsvgpicture.withColorFilter(path: 'assets/svg/logo.svg',),
+               
 
                       SizedBox(width: 16),
 
@@ -53,7 +55,8 @@ class _MyWidgetState extends State<WelcomeScreen> {
                         "Welcome To Tasky ",
                         style: Theme.of(context).textTheme.displaySmall,
                       ),
-                      SvgPicture.asset('assets/svg/hand.svg'),
+                      Customsvgpicture.withColorFilter(path:'assets/svg/hand.svg' )
+                     
                     ],
                   ),
                   SizedBox(height: 8),
@@ -67,29 +70,11 @@ class _MyWidgetState extends State<WelcomeScreen> {
                     
                   ),
                   SizedBox(height: 24),
-                  SvgPicture.asset(
-                    'assets/svg/pana.svg',
-                    width: 215,
-                    height: 200,
-                  ),
+                  Customsvgpicture.withColorFilter(path:'assets/svg/pana.svg',width: 215,height: 200, ),
+                 
                   SizedBox(height: 24),
 
-                  // Align(
-                  //   alignment: Alignment.centerLeft,
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.symmetric(horizontal: 16),
-                  //     child: Text(
-                  //       "Full Name",
-                  //       style: TextStyle(
-                  //         fontSize: 16,
-                  //         fontWeight: FontWeight.w400,
-                  //         color: Color(0xffFFFCFC),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
-                   //SizedBox(height: 8),
+               
                   Padding(
                padding: const EdgeInsets.symmetric(
                        horizontal: 16,
@@ -109,53 +94,17 @@ class _MyWidgetState extends State<WelcomeScreen> {
                       
                       ),
                   ),
-                  // حقل إدخال الاسم الكامل
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     horizontal: 16,
-                  //     vertical: 16,
-                  //   ),
-
-
-                  //   child: TextFormField(
-                  //     controller: controller,
-                  //     style: TextStyle(color: Colors.white),
-                  //     // التحقق من صحة البيانات
-                  //     validator: (String? value) {
-                  //       //if(value?.trim().isEmpty??false)
-                  //       if (value == null || value.trim().isEmpty) {
-                  //         return "Please enter this field ";
-                  //       }
-                  //       return null;
-                  //     },
-
-                  //     decoration: InputDecoration(
-                  //       hintText: ("e.g. Maha Atef"),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(16),
-                  //         borderSide: BorderSide.none,
-                  //       ),
-
-                  //       filled: true,
-                  //       fillColor: Color(0xff282828),
-                  //     ),
-                  //     cursorColor: Colors.white,
-                  //   ),
-                  // ),
-
+                
                   SizedBox(height: 24),
 
                   ElevatedButton(
                     onPressed: () async {
-                      // _key.currentState?.validate();
-
+                   
                       if (_key.currentState?.validate() ?? false) {
                               //هيك قدرت اختصر السطرين 
                              await   PreferencesManager().setString('username', controller.value.text);
 
-                        //final pref = await SharedPreferences.getInstance();
-                        // تخزين اسم المستخدم (⚠️ غير مشفّر)
-                       // pref.setString('username', controller.value.text);
+                     
 
                         Navigator.pushReplacement(
                           context,

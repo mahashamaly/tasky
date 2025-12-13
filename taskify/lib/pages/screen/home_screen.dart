@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:io';
+
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:taskify/core/services/Preferences_manager.dart';
+import 'package:taskify/core/widget/custom-svg-picture.dart';
 import 'package:taskify/models/task_model.dart';
 import 'package:taskify/pages/screen/add-Task-Screen.dart';
 
@@ -28,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   //قائمة المهام
   List<TaskModel> tasks = [];
   bool isLoading = false;
+  String? userImagePath;
+
   //يتم استدعاؤها مرة وحدة عند انشاء الصفحة
   //تحميل اسم المستخدم والمهام
   void initState() {
@@ -83,13 +87,30 @@ class _HomeScreenState extends State<HomeScreen> {
     //pref.setString('tasks', jsonEncode(updateTask));
   }
 
+
+
+
+
+  
+  _deleteTask(int?id) async {
+    if(id==null)return;
+   setState(() {
+     tasks.removeWhere((task)=>task.id==id);
+      _calPersent();
+   });
+     final updateTask = tasks.map((e) => e.toJson()).toList();
+    PreferencesManager().setString('tasks', jsonEncode(updateTask));
+  }
+
+
   void _LoadUserName() async {
     
     //استخدام ست ستيت لتحديث واجهة الصفحة بعد تحميل الاسم.
     setState(() {
 
      username= PreferencesManager().getString('username')??'';
-      //username = pref.getString('username') ?? '';
+      userImagePath=PreferencesManager().getString('user-image');
+
     });
 
     print("username == $username");
@@ -123,8 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
          
 
-          backgroundColor: Color(0xff15B86C),
-          foregroundColor: Color(0xffFFFCFC),
+         
           icon: Icon(Icons.add),
           label: Text("Add New Task"),
           shape: RoundedRectangleBorder(
@@ -144,7 +164,14 @@ class _HomeScreenState extends State<HomeScreen> {
                      Row(
                    children: [
                      CircleAvatar(
-                       backgroundImage: AssetImage('assets/image/person.png'),
+                       backgroundImage:userImagePath==null
+                       
+                       ? AssetImage('assets/image/person.png')
+                      
+                       //
+                       //اعرض صورة موجودة على جهاز الهاتف المسار تبعها موجود
+                       //userImagePath!
+                       :FileImage(File(userImagePath!)),
                      ),
                      SizedBox(width: 10),
                      Column(
@@ -178,7 +205,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             style:Theme.of(context).textTheme.displayLarge,
                        
                      ),
-                     SvgPicture.asset('assets/svg/hand.svg'),
+                  
+                    Customsvgpicture.withColorFilter(path:'assets/svg/hand.svg' ),
                    ],
                  ),
                  SizedBox(height: 16),
@@ -204,11 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                    padding: EdgeInsets.only(top: 24, bottom: 16),
                    child: Text(
                      "My Tasks",
-                     style: TextStyle(
-                       fontSize: 20,
-                       fontWeight: FontWeight.w400,
-                       color: Color(0XFFFFFCFC),
-                     ),
+                     style: Theme.of(context).textTheme.labelSmall
                    ),
                  ),
                 
@@ -241,7 +265,11 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (bool? value, int? index) {
           _doneTask(value, index);
         },
-        emptyMessage: 'no data',
+        emptyMessage: 'no data', onDelete: (int? id) { 
+          _deleteTask(id);
+         }, onEdit: (){
+          _LoadTask();
+         },
       ),
   ],
 ),
