@@ -4,6 +4,7 @@ import 'dart:io';
 
 
 import 'package:flutter/material.dart';
+import 'package:taskify/constants/storage-key.dart';
 
 import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/widget/custom-svg-picture.dart';
@@ -108,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //استخدام ست ستيت لتحديث واجهة الصفحة بعد تحميل الاسم.
     setState(() {
 
-     username= PreferencesManager().getString('username')??'';
+     username= PreferencesManager().getString(StorageKey.username)??'';
       userImagePath=PreferencesManager().getString('user-image');
 
     });

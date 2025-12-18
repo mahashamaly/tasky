@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/constants/storage-key.dart';
 
 import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/widget/custom_text_form_faild.dart';
@@ -75,7 +76,7 @@ final GlobalKey<FormState> _key=GlobalKey();
                 if(_key.currentState!.validate()){
                
                       // تخزين اسم المستخدم (⚠️ غير مشفّر)
-                      PreferencesManager().setString('username', userNameController.value.text);
+                      PreferencesManager().setString(StorageKey.username, userNameController.value.text);
                        PreferencesManager().setString('MotivationQuote', MotivationQuoteController.value.text);
                     //await  pref.setString('username', userNameController.value.text);
                     //await  pref.setString('MotivationQuote', MotivationQuoteController.value.text);

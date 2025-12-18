@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:taskify/constants/storage-key.dart';
 
 import 'package:taskify/core/services/Preferences_manager.dart';
 import 'package:taskify/core/theme/themeController.dart';
@@ -35,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _loadData() async {
     //استخدام ست ستيت لتحديث واجهة الصفحة بعد تحميل الاسم.
     setState(() {
-      username = PreferencesManager().getString('username') ?? '';
+      username = PreferencesManager().getString(StorageKey.username) ?? '';
       // username = pref.getString('username') ?? '';
       // MotivationQuote = pref.getString()??"One task at a time. One step closer." ;
       MotivationQuote =
@@ -194,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 ListTile(
                   onTap: () async {
-                    PreferencesManager().remove("username");
+                    PreferencesManager().remove(StorageKey.username);
                     PreferencesManager().remove("MotivationQuote");
                     PreferencesManager().remove("tasks");
 

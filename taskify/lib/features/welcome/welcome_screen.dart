@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskify/constants/storage-key.dart';
 
 
 import 'package:taskify/core/services/Preferences_manager.dart';
@@ -36,6 +37,7 @@ class _MyWidgetState extends State<WelcomeScreen> {
                
 
                       SizedBox(width: 16),
+                      
 
                       Text(
                         "Tasky",
@@ -102,7 +104,7 @@ class _MyWidgetState extends State<WelcomeScreen> {
                    
                       if (_key.currentState?.validate() ?? false) {
                               //هيك قدرت اختصر السطرين 
-                             await   PreferencesManager().setString('username', controller.value.text);
+                             await   PreferencesManager().setString(StorageKey.username, controller.value.text);
 
                      
 
