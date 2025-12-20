@@ -120,6 +120,7 @@ class _MyWidgetState extends State<WelcomeScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("please Enter Your Full Name")),
                       );
+                      
                       }
                     },
 

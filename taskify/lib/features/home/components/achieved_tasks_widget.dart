@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class AchievedTasksWidget extends StatelessWidget {
-  const AchievedTasksWidget({super.key, required this.totalTask, required this.doneTask, required this.percent,});
+  const AchievedTasksWidget({super.key, required this.totalTask, required this.totalDoneTaskS, required this.percent,});
    final int totalTask;
-    final int doneTask;
+    final int totalDoneTaskS;
 final  double percent;
 
   @override
@@ -32,7 +32,7 @@ final  double percent;
             SizedBox(
               height: 4,
             ),
-            Text("${doneTask} Out of ${totalTask} Done",style: Theme.of(context).textTheme.titleSmall),
+            Text("${totalDoneTaskS} Out of ${totalTask} Done",style: Theme.of(context).textTheme.titleSmall),
           ],
         ),
         Stack(
